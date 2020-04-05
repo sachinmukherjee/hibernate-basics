@@ -1,8 +1,12 @@
 package sachinmukherjee.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -11,6 +15,7 @@ public class OwnerCompany {
 
 	@Id
 	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	@Column(name="name")
@@ -21,6 +26,9 @@ public class OwnerCompany {
 	
 	@Column(name="is_head_office")
 	private int is_head_office;
+	
+	@OneToOne(mappedBy = "ownerCompany", cascade = CascadeType.ALL) // Points to ownerCompany Property in OwnerCompany Offices Entity
+	private OwnerCompanyOffices ownerCompanyOffices;
 
 	public OwnerCompany() {
 		
@@ -47,6 +55,10 @@ public class OwnerCompany {
 	public void setShort_name(String short_name) {
 		this.short_name = short_name;
 	}
+	
+	public void setOwnerCompanyOffices(OwnerCompanyOffices ownerCompanyOffices) {
+		this.ownerCompanyOffices = ownerCompanyOffices;
+	}
 
 	public int getIs_head_office() {
 		return is_head_office;
@@ -58,6 +70,10 @@ public class OwnerCompany {
 
 	public int getId() {
 		return id;
+	}
+	
+	public OwnerCompanyOffices getOwnerCompanyOffices() {
+		return ownerCompanyOffices;
 	}
 
 	@Override
