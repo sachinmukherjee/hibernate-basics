@@ -1,4 +1,6 @@
 package sachinmukherjee.hibernate_basics;
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -24,6 +26,8 @@ public class App
        
        try {
     	   
+    	   /*****************Saving Data****************************/
+    	   /*
     	   //Create Object
     	   System.out.println("Creating Object");
     	   OwnerCompany owner_company = new OwnerCompany("Innovae3D","I3D",0);
@@ -39,7 +43,11 @@ public class App
     	   session.getTransaction().commit();
     	   
     	   System.out.println("Done!!!!!!!!!!!");
+    	   */
     	   
+    	   /****************Retrive Data*************************/
+    	   
+    	   /*
     	   session = factory.getCurrentSession();
     	   System.out.println("Fetching Data!!!!!!!!!!!");
     	   
@@ -50,7 +58,53 @@ public class App
     	   System.out.println(company);
     	   
     	   session.getTransaction().commit();
+    	   */
     	   
+    	   /***************HQL*******************************/
+    	   /*
+    	   session = factory.getCurrentSession();
+    	   session.beginTransaction();
+    	   
+    	   List<OwnerCompany> ownerCompanies = session
+    			   						.createQuery("from OwnerCompany")
+    			   						.getResultList();
+    	   
+    	   
+    	   for(int i=0;i<ownerCompanies.size();i++) {
+    		   System.out.println(ownerCompanies.get(i));
+    	   }
+    	   
+    	   session.getTransaction().commit();
+    	   */
+    	   
+    	   /*******************Update*****************************/
+    	   /*
+    	   session = factory.getCurrentSession();
+    	   session.beginTransaction();
+    	   int ownerCompanyId = 9;
+    	   OwnerCompany ownerCompany = session.get(OwnerCompany.class, ownerCompanyId);
+    	   ownerCompany.setName("Innovae 3D Printing");
+    	   session.getTransaction().commit();
+    	   */
+    	   
+    	   /****************HQL Update**************************/
+    	   /*
+    	   session = factory.getCurrentSession();
+    	   session.beginTransaction();
+    	   session.createQuery("update OwnerCompany set name='Innovae 3D Prining' where short_name='I3D'")
+    	   			.executeUpdate();
+    	   session.getTransaction().commit();
+    	   */
+    	   
+    	   /****************Delete************************/
+    	   /*
+    	   session = factory.getCurrentSession();
+    	   int ownerCompanyId = 9;
+    	   session.beginTransaction();
+    	   OwnerCompany ownerCompany = session.get(OwnerCompany.class, ownerCompanyId);
+    	   session.delete(ownerCompany);
+    	   session.getTransaction().commit();
+    	   */
     	
        }catch(Exception e) {
     	   e.printStackTrace();
